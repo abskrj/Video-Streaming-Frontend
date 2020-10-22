@@ -1,0 +1,42 @@
+.navbar {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 20px ;
+}
+
+.navbar__left {
+    display: flex;
+    align-items: center;
+}
+
+.navbar__menu {
+    margin-right: 10px;
+}
+
+.navbar__middle {
+    display: flex;
+    align-items: center;
+}
+
+.navbar__search {
+    width: auto;
+}
+
+.navbar__search__btn {
+    margin-top: -5px !important;
+}
+
+.navbar__right {
+    display: flex;
+    align-items: center;
+}
+
+.navbar__notification {
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.navbar__profile {
+    border-radius: 50%;
+}
