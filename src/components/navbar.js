@@ -5,11 +5,23 @@ import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import { Button } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 import "../assets/css/navbar.css";
 
 
 export default class Navbar extends Component {
+    constructor() {
+        super();
+        this.state = {
+            searchQuery: ""
+        }
+    }
+
+    onChange = (e) => {
+        this.setState({ [e.target.name]: e.target.value });
+        console.log()
+    };
 
     render() {
 
@@ -18,17 +30,19 @@ export default class Navbar extends Component {
                 <div className="navbar__left">
                     < MenuIcon className="navbar__menu" />
                     <h2>Logo</h2>
-
                 </div>
 
                 <div className="navbar__middle">
                     <form noValidate autoComplete="off">
 
-                        <TextField className="navbar__search" size="small" id="outlined-basic" label="Search" variant="outlined" />
-                        
-                        <IconButton color="default" aria-label="add to shopping cart">
-                            <SearchIcon className="navbar__search__btn" />
-                        </IconButton>
+                        <TextField onChange={this.onChange} name="searchQuery" className="navbar__search" size="small" id="outlined-basic" label="Search" variant="outlined" />
+
+                            <Link to={`/search/${this.state.searchQuery}`}>
+                                <IconButton color="default" aria-label="add to shopping cart">
+                                    <SearchIcon className="navbar__search__btn" />
+                                </IconButton>
+                            </Link>
+
                     </form>
                 </div>
 

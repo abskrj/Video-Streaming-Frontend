@@ -2,7 +2,11 @@
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
-    padding: 20px ;
+    padding: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: white;
 }
 
 .navbar__left {
@@ -11,7 +15,7 @@
 }
 
 .navbar__menu {
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
 .navbar__middle {

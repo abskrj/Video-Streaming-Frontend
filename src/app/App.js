@@ -1,5 +1,8 @@
 import React from 'react';
 import Home from '../container/home';
+import Navbar from "../components/navbar";
+import { BrowserRouter as Router } from "react-router-dom";
+
 
 function App() {
   return (
@@ -7,7 +10,11 @@ function App() {
     // Please follow BAM Naming Convention
 
     <div className="app">
-      <Home />
+      <Router>
+        <Navbar />
+
+        <Home />
+      </Router>
     </div>
   );
 }

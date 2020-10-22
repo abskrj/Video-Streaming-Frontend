@@ -1,0 +1,53 @@
+.videoTile {
+    width: auto;
+    margin-left: 100px;
+    transition: all .1s linear;
+
+}
+
+.videoTile__thumbnail {
+    width: 246px;
+    height: 138px;
+    object-fit: contain;
+}
+
+.videoTile:hover {
+    cursor: pointer;
+    transform: translate3d(1px, -2px, 0px);
+}
+
+.videoTile__main {
+    display: flex;
+}
+
+.videoTile__info {
+    margin-left: 10px;
+}
+
+.videoTile__avtar {
+    border-radius: 50%;
+    height: 25px;
+}
+
+.videoTile__meta {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 12px;
+    color: gray;
+}
+
+.videoTile__detail {
+    display: flex;
+    align-items: center;
+}
+
+.videoTile__userName {
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+.videoTile__description {
+    margin-top: 10px;
+    font-size: 14px;
+
+}

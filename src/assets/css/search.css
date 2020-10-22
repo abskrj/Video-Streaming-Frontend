@@ -1,0 +1,11 @@
+.searchPage__main {
+    flex: 0.8;
+    background-color: #f9f9f9;
+    padding: 20px 40px;
+    padding-bottom: 0;
+}
+
+.searchPage__main > h2 {
+    margin-left: 5px;
+    margin-bottom: 20px;
+}
