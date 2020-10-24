@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { useParams, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import "../assets/css/search.css"
 import VideoTile from "./videoTile";
 

@@ -7,12 +7,14 @@ import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
+
 import "../assets/css/navbar.css";
 
 
 export default class Navbar extends Component {
     constructor() {
         super();
+
         this.state = {
             searchQuery: ""
         }
@@ -23,13 +25,18 @@ export default class Navbar extends Component {
         console.log()
     };
 
+
     render() {
 
         return (
             <div className="navbar">
                 <div className="navbar__left">
-                    < MenuIcon className="navbar__menu" />
-                    <h2>Logo</h2>
+                    <Button>
+                        < MenuIcon className="navbar__menu" />
+                    </Button>
+                    <Link to="/" style={{ color: 'inherit', textDecoration: 'inherit' }} >
+                        <h2>Logo</h2>
+                    </Link>
                 </div>
 
                 <div className="navbar__middle">
@@ -37,19 +44,26 @@ export default class Navbar extends Component {
 
                         <TextField onChange={this.onChange} name="searchQuery" className="navbar__search" size="small" id="outlined-basic" label="Search" variant="outlined" />
 
-                            <Link to={`/search/${this.state.searchQuery}`}>
-                                <IconButton color="default" aria-label="add to shopping cart">
-                                    <SearchIcon className="navbar__search__btn" />
-                                </IconButton>
-                            </Link>
+                        <Link to={`/search/${this.state.searchQuery}`}>
+                            <IconButton color="default" aria-label="add to shopping cart">
+                                <SearchIcon className="navbar__search__btn" />
+                            </IconButton>
+                        </Link>
 
                     </form>
                 </div>
 
                 <div className="navbar__right">
                     <Button>Upload Video</Button>
-                    <NotificationsNoneIcon className="navbar__notification" />
-                    <img className="navbar__profile" src="https://secure.gravatar.com/avatar/a001a3f46d1449494fdcb542d22afad0?default=wavatar" height="40px" alt="" />
+                    <Button>
+                        <NotificationsNoneIcon className="navbar__notification" />
+                    </Button>
+                    <Link to="/login">
+                        <Button>
+                            <img className="navbar__profile" src="https://secure.gravatar.com/avatar/a001a3f46d1449494fdcb542d22afad0?default=wavatar" height="40px" alt="" />
+                        </Button>
+                    </Link>
+
                 </div>
             </div>
         )

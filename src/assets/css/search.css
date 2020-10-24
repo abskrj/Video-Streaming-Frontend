@@ -9,3 +9,7 @@
     margin-left: 5px;
     margin-bottom: 20px;
 }
+
+.search__main {
+    display: flex;
+}
