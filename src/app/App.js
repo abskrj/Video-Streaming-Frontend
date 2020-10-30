@@ -5,6 +5,7 @@ import Search from "../container/search";
 import Login from "../container/login";
 import Signup from "../container/signup";
 import Forget from "../container/forget";
+import Watch from "../container/watch";
 
 
 
@@ -17,48 +18,52 @@ export default class App extends Component {
     return (
       <div className="app">
         <Router>
-        <Navbar />
+          <Navbar />
 
-        <Switch>
+          <Switch>
 
-          <Route path="/login">
-            <Login />
-          </Route>
+            <Route path="/watch/:videoId">
+              <Watch />
+            </Route>
 
-          <Route path="/signup">
-            <Signup />
-          </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
 
-          <Route path="/forget">
-            <Forget />
-          </Route>
+            <Route path="/signup">
+              <Signup />
+            </Route>
 
-          <Route path="/search/:searchQuery">
-            <Search />
-          </Route>
+            <Route path="/forget">
+              <Forget />
+            </Route>
 
-          <Route path="/trending">
-            < Home pageTitle="Trending" />
-          </Route>
+            <Route path="/search/:searchQuery">
+              <Search />
+            </Route>
 
-          <Route path="/likedvideos">
-            < Home pageTitle="Liked Videos" />
-          </Route>
+            <Route path="/trending">
+              < Home pageTitle="Trending" />
+            </Route>
 
-          <Route path="/myvideos">
-            < Home pageTitle="My Videos" />
-          </Route>
+            <Route path="/likedvideos">
+              < Home pageTitle="Liked Videos" />
+            </Route>
 
-          <Route path="/watchlater">
-            < Home pageTitle="Watch Later" />
-          </Route>
+            <Route path="/myvideos">
+              < Home pageTitle="My Videos" />
+            </Route>
 
-          <Route path="/">
-            < Home pageTitle="Recommended" />
-          </Route>
-        </Switch>
+            <Route path="/watchlater">
+              < Home pageTitle="Watch Later" />
+            </Route>
 
-      </Router>
+            <Route path="/">
+              < Home pageTitle="Recommended" />
+            </Route>
+          </Switch>
+
+        </Router>
       </div>
     )
   }
