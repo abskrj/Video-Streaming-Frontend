@@ -1,23 +1,14 @@
 import React, { Component } from 'react';
 import "../assets/css/watch.css";
-import 'shaka-player/dist/controls.css';
-const shaka = require('shaka-player/dist/shaka-player.ui.js');
+import { Replay } from 'vimond-replay';
+import 'vimond-replay/index.css';
+import ShakaVideoStreamer from 'vimond-replay/video-streamer/shaka-player';
 
 export default class Watch extends Component {
 
     constructor(props) {
 
         super(props);
-
-        //Creating reference to store video component on DOM
-        this.videoComponent = React.createRef();
-
-        //Creating reference to store video container on DOM
-        this.videoContainer = React.createRef();
-
-        //Initializing reference to error handlers
-        this.onErrorEvent = this.onErrorEvent.bind(this);
-        this.onError = this.onError.bind(this);
 
         this.state = {
             video: {
@@ -27,63 +18,72 @@ export default class Watch extends Component {
         }
     }
 
-    onErrorEvent(event) {
-        // Extract the shaka.util.Error object from the event.
-        this.onError(event.detail);
-    }
-
-    onError(error) {
-        // Log the error.
-        console.error('Error code', error.code, 'object', error);
-    }
-
-    componentDidMount() {
-
-        //Link to MPEG-DASH video
-        var manifestUri = 'https://storage.googleapis.com/shaka-demo-assets/angel-one/dash.mpd';
-
-        //Getting reference to video and video container on DOM
-        const video = this.videoComponent.current;
-        const videoContainer = this.videoContainer.current;
-
-        //Initialize shaka player
-        var player = new shaka.Player(video);
-
-        //Setting UI configuration JSON object
-        const uiConfig = {};
-
-        //Configuring elements to be displayed on video player control panel
-        uiConfig['controlPanelElements'] = ['mute', 'volume', 'time_and_duration', 'fullscreen', 'overflow_menu',];
-
-        //Setting up shaka player UI
-        const ui = new shaka.ui.Overlay(player, videoContainer, video);
-
-        ui.configure(uiConfig); //configure UI
-        ui.getControls();
-
-        // Listen for error events.
-        player.addEventListener('error', this.onErrorEvent);
-
-        // Try to load a manifest.
-        // This is an asynchronous process.
-        player.load(manifestUri).then(function () {
-            // This runs if the asynchronous load is successful.
-            console.log('The video has now been loaded!');
-        }).catch(this.onError);  // onError is executed if the asynchronous load fails.
-
-    }
+    // componentDidUpdate() {
+    //     const url = "https://cdn-firestream.s3.ap-south-1.amazonaws.com/videos/vDIT7VC/vDIT7VC.mpd";
+    //     const video = this.player;
+    //     const dashjs = dashjs.MediaPlayer().create();
+    //     dashjs.initialize(video, url, true);
+    // }
 
     render() {
+        const VideoPlayerConfig = {
+            interactionDetector: {
+                inactivityDelay: 2
+            },
+            keyboardShortcuts: {
+                keyMap: {
+                    togglePause: [' ', 'Enter', 'P'],
+                    toggleFullscreen: 'F',
+                    decreaseVolume: '-',
+                    increaseVolume: '+',
+                    skipBack: ',',
+                    skipForward: '.',
+                    toggleUserActive: 'C',
+                    toggleMute: 'M'
+                }
+            },
+            userSettings: {
+                hasPrecedence: false,
+                storageKey: 'replay-settings',
+                settingsStoragePolicy: {
+                    volume: 'local',
+                    isMuted: 'local'
+                }
+            },
+            responsivenessRules: [{
+                className: 'narrow',
+                width: {
+                    max: 640
+                }
+            }, {
+                className: 'medium-width',
+                width: {
+                    min: 640,
+                    max: 700
+                }
+            }, {
+                className: 'wide',
+                width: {
+                    min: 1024
+                }
+            }],
+            controls: {
+                skipButtonOffset: -10,
+                qualitySelectionStrategy: 'cap-bitrate',
+                liveDisplayMode: 'clock-time'
+            }
+        };
         return (
             <div className="watchVideo__main">
                 <div className="video-container" ref={this.videoContainer}>
-                    <video
-                        className="shaka-video"
-                        ref={this.videoComponent}
-                        poster={this.state.video.poster}
-                        autoPlay
-                        width="1000"
-                    />
+                    <Replay className="player" options={VideoPlayerConfig} source="https://cdn-firestream.s3.ap-south-1.amazonaws.com/videos/vDIT7VC/vDIT7VC.mpd" initialPlaybackProps={{ isPaused: true }}>
+                        <ShakaVideoStreamer />
+                    </Replay>
+                </div>
+                <div className="watchVideo__details">
+                    <h2>Video Title</h2>
+                    <p>Video Description</p>
+                    
                 </div>
             </div>
         )

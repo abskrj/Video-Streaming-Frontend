@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import userContext from "../context/userContext";
 
 // function Copyright() {
 //   return (
@@ -60,40 +61,13 @@ export default function Login() {
           Log in
         </Typography>
         <form className={classes.form} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Username"
-            name="username"
-            autoFocus
+          <TextField variant="outlined" margin="normal" required fullWidth id="email" label="Username" name="username" autoFocus
           />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
+          <TextField variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password"
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
+          <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me"
           />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-          >
-            Log In
-          </Button>
+          <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>Log In</Button>
           <Grid container>
             <Grid item xs>
               <Link href="/forget" variant="body2">

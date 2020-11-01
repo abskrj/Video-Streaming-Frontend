@@ -9,44 +9,68 @@ import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import SettingsIcon from '@material-ui/icons/Settings';
 import HelpIcon from '@material-ui/icons/Help';
 import { Link } from "react-router-dom";
+import { SidebarProvider } from "../context/side.context";
 
 export default class Sidebar extends Component {
+    constructor() {
+        super();
+        this.state = {
+            sideBar: true
+        }
+    }
+
+    toggleSidebar = () => {
+        console.log('clicked');
+        if (this.state.sideBar) {
+            this.setState({ sideBar: false });
+        }
+        else {
+            this.setState({ sideBar: true });
+        }
+    }
+
     render() {
+        const { toggleSidebar } = this
+
         return (
-            <div className="sidebar__main">
-                <Link to="/" style={{ color: 'inherit', textDecoration: 'inherit'}}>
-                    < SidebarItem selected Icon={HomeIcon} title="Home" />
-                </Link>
+            <SidebarProvider value={toggleSidebar}>
+                <div className="sidebar__main" style={{ display: this.state.sideBar ? 'block' : 'none' }}>
 
-                <Link to="/trending" style={{ color: 'inherit', textDecoration: 'inherit'}}>
-                    < SidebarItem Icon={WhatshotIcon} title="Trending" />
-                </Link>
+                    <Link to="/" style={{ color: 'inherit', textDecoration: 'inherit' }}>
+                        < SidebarItem selected Icon={HomeIcon} title="Home" />
+                    </Link>
 
-                <hr />
+                    <Link to="/trending" style={{ color: 'inherit', textDecoration: 'inherit' }}>
+                        < SidebarItem Icon={WhatshotIcon} title="Trending" />
+                    </Link>
 
-                <Link to="/myvideos" style={{ color: 'inherit', textDecoration: 'inherit'}}>
-                    < SidebarItem Icon={VideoLibraryIcon} title="My videos" />
-                </Link>
+                    <hr />
 
-                <Link to="watchlater" style={{ color: 'inherit', textDecoration: 'inherit'}}>
-                    < SidebarItem Icon={WatchLaterIcon} title="Watch later" />
-                </Link>
+                    <Link to="/myvideos" style={{ color: 'inherit', textDecoration: 'inherit' }}>
+                        < SidebarItem Icon={VideoLibraryIcon} title="My videos" />
+                    </Link>
 
-                <Link style={{ color: 'inherit', textDecoration: 'inherit'}}>
-                    < SidebarItem Icon={ThumbUpIcon} title="Liked videos" />
-                </Link>
+                    <Link to="/watchlater" style={{ color: 'inherit', textDecoration: 'inherit' }}>
+                        < SidebarItem Icon={WatchLaterIcon} title="Watch later" />
+                    </Link>
 
-                <hr />
+                    <Link to='/' style={{ color: 'inherit', textDecoration: 'inherit' }}>
+                        < SidebarItem Icon={ThumbUpIcon} title="Liked videos" />
+                    </Link>
 
-                <Link style={{ color: 'inherit', textDecoration: 'inherit'}}>
-                    < SidebarItem Icon={SettingsIcon} title="Settings" />
-                </Link>
+                    <hr />
 
-                <Link style={{ color: 'inherit', textDecoration: 'inherit'}}>
-                    < SidebarItem Icon={HelpIcon} title="Help" />
-                </Link>
+                    <Link to='/' style={{ color: 'inherit', textDecoration: 'inherit' }}>
+                        < SidebarItem Icon={SettingsIcon} title="Settings" />
+                    </Link>
 
-            </div>
+                    <Link to='/' style={{ color: 'inherit', textDecoration: 'inherit' }}>
+                        < SidebarItem Icon={HelpIcon} title="Help" />
+                    </Link>
+
+                </div>
+            </SidebarProvider>
         )
+
     }
 }

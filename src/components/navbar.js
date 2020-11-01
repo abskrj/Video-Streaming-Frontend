@@ -6,6 +6,7 @@ import IconButton from '@material-ui/core/IconButton';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { SidebarConsumer } from "../context/side.context";
 
 
 import "../assets/css/navbar.css";
@@ -16,24 +17,34 @@ export default class Navbar extends Component {
         super();
 
         this.state = {
-            searchQuery: ""
+            searchQuery: "",
+            sideBar: true
         }
     }
 
     onChange = (e) => {
         this.setState({ [e.target.name]: e.target.value });
-        console.log()
     };
-
 
     render() {
 
         return (
             <div className="navbar">
                 <div className="navbar__left">
-                    <Button>
-                        < MenuIcon className="navbar__menu" />
-                    </Button>
+
+                    <SidebarConsumer>
+                        {
+                            (value) => {
+                                console.log(value);
+                                return (
+                                    <Button onClick={value}>
+                                        < MenuIcon className="navbar__menu" />
+                                    </Button>
+                                )
+                            }
+                        }
+                    </SidebarConsumer>
+
                     <Link to="/" style={{ color: 'inherit', textDecoration: 'inherit' }} >
                         <h2>Logo</h2>
                     </Link>
