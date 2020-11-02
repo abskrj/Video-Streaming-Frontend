@@ -1,45 +1,31 @@
-import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import userContext from "../context/userContext";
-
-// function Copyright() {
-//   return (
-//     <Typography variant="body2" color="textSecondary" align="center">
-//       {'Copyright © '}
-//       <Link color="inherit" href="https://material-ui.com/">
-//         Your Website
-//       </Link>{' '}
-//       {new Date().getFullYear()}
-//       {'.'}
-//     </Typography>
-//   );
-// }
+import React, { useState } from "react";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import Container from "@material-ui/core/Container";
+import axios from "axios";
+import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%",
     marginTop: theme.spacing(1),
   },
   submit: {
@@ -49,6 +35,56 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login() {
   const classes = useStyles();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [disableSubmit, setDisableSubmit] = useState(false);
+  const [alert, setAlert] = useState(false);
+  const [alertType, setAlertType] = useState(false);
+  const [alertMessage, setAlertMessage] = useState(false);
+
+  const login = (event) => {
+    event.preventDefault();
+    setDisableSubmit(true);
+    deleteAlert();
+    createAlert('info', `Processing...Please Wait`);
+
+    const axiosConfig = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+
+    const data = {
+      'username': username,
+      'password': password
+    }
+
+    axios.post("https://radiant-dawn-27084.herokuapp.com/api/auth/signin", data, axiosConfig)
+      .then((res) => {
+        deleteAlert();
+        createAlert('success', `Logged in as ${res.data.username}`);
+      })
+      .catch((err) => {
+        deleteAlert();
+        if (err.response.status === 404) {
+          createAlert('error', `Username or Password invalid`);
+        }
+        else {
+          createAlert('error', `Something went wrong`);
+        }
+        setDisableSubmit(false);
+      });
+  }
+
+  const createAlert = (type, message) => {
+    setAlertType(type);
+    setAlertMessage(message);
+    setAlert(true);
+  }
+
+  const deleteAlert = () => {
+    setAlert(null);
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -61,13 +97,46 @@ export default function Login() {
           Log in
         </Typography>
         <form className={classes.form} noValidate>
-          <TextField variant="outlined" margin="normal" required fullWidth id="email" label="Username" name="username" autoFocus
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="username"
+            label="Username"
+            name="username"
+            autoFocus
+            value={username}
+            onChange={event => setUsername(event.target.value)}
           />
-          <TextField variant="outlined" margin="normal" required fullWidth name="password" label="Password" type="password" id="password" autoComplete="current-password"
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+            value={password}
+            onChange={event => setPassword(event.target.value)}
           />
-          <FormControlLabel control={<Checkbox value="remember" color="primary" />} label="Remember me"
-          />
-          <Button type="submit" fullWidth variant="contained" color="primary" className={classes.submit}>Log In</Button>
+          {/* <FormControlLabel
+            control={<Checkbox value="remember" color="primary" />}
+            label="Remember me"
+          /> */}
+          <Button
+            disabled={disableSubmit}
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            onClick={login}
+          >
+            Log In
+          </Button>
           <Grid container>
             <Grid item xs>
               <Link href="/forget" variant="body2">
@@ -81,10 +150,14 @@ export default function Login() {
             </Grid>
           </Grid>
         </form>
+        {alert}
       </div>
       <Box mt={8}>
-        {/* <Copyright /> */}
+        {
+          (alert) ? <Alert severity={alertType}>{alertMessage}</Alert> : null
+        }
       </Box>
+
     </Container>
   );
 }

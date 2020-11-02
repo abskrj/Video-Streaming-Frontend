@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -12,19 +12,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
-// function Copyright() {
-//   return (
-//     <Typography variant="body2" color="textSecondary" align="center">
-//       {'Copyright © '}
-//       <Link color="inherit" href="https://material-ui.com/">
-//         Your Website
-//       </Link>{' '}
-//       {new Date().getFullYear()}
-//       {'.'}
-//     </Typography>
-//   );
-// }
+import Alert from '@material-ui/lab/Alert';
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -38,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%',
     marginTop: theme.spacing(3),
   },
   submit: {
@@ -48,6 +37,96 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Signup() {
   const classes = useStyles();
+
+  const [displayName, setDisplayName] = useState('');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [disableSubmit, setDisableSubmit] = useState(true);
+  const [alert, setAlert] = useState(false);
+  const [alertType, setAlertType] = useState(false);
+  const [alertMessage, setAlertMessage] = useState(false);
+
+  const toggleTnc = () => {
+    if (disableSubmit) {
+      setDisableSubmit(false);
+    }
+    else {
+      setDisableSubmit(true);
+    }
+  }
+
+  const signUp = (event) => {
+    event.preventDefault();
+    deleteAlert();
+    createAlert('info', `Processing...Please Wait`);
+    setDisableSubmit(true);
+
+    if (!displayName.trim().length) {
+      deleteAlert();
+      createAlert('warning', `Please enter your name.`);
+      setDisableSubmit(false);
+      return;
+    }
+
+    if (!username.trim().length) {
+      deleteAlert();
+      createAlert('warning', `Please enter your username.`);
+      setDisableSubmit(false);
+      return;
+    }
+
+    if (!(/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email))) {
+      deleteAlert();
+      createAlert('warning', `Please enter a valid email.`);
+      setDisableSubmit(false);
+      return;
+    }
+
+    if (password.length < 8) {
+      deleteAlert();
+      createAlert('warning', `Password should be atleast 8 characters long.`);
+      setDisableSubmit(false);
+      return;
+    }
+
+    const axiosConfig = {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }
+
+    const data = {
+      'name': displayName,
+      'username': username,
+      'email': email,
+      'password': password
+    }
+
+    axios.post("https://radiant-dawn-27084.herokuapp.com/api/auth/signup", data, axiosConfig)
+      .then((res) => {
+        console.log(res);
+        deleteAlert();
+        createAlert('success', res.data.message);
+      })
+      .catch((err) => {
+        deleteAlert();
+        // console.log(err.response)
+        createAlert('error', err.response.data.message);
+        setDisableSubmit(false);
+      });
+
+  }
+
+  const createAlert = (type, message) => {
+    setAlertType(type);
+    setAlertMessage(message);
+    setAlert(true);
+  }
+
+  const deleteAlert = () => {
+    setAlert(null);
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -71,6 +150,7 @@ export default function Signup() {
                 id="name"
                 label="Name"
                 autoFocus
+                onChange={event => setDisplayName(event.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -82,6 +162,7 @@ export default function Signup() {
                 label="Username"
                 name="username"
                 autoComplete="username"
+                onChange={event => setUsername(event.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -93,6 +174,7 @@ export default function Signup() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                onChange={event => setEmail(event.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -105,12 +187,13 @@ export default function Signup() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={event => setPassword(event.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
               <FormControlLabel
-                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                label="I agree to the Terms and Condition of this website."
+                control={<Checkbox color="primary" onClick={toggleTnc} />}
+                label="I agree to the Terms  and Condition of this website."
               />
             </Grid>
           </Grid>
@@ -120,6 +203,8 @@ export default function Signup() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            disabled={disableSubmit}
+            onClick={signUp}
           >
             Sign Up
           </Button>
@@ -132,8 +217,10 @@ export default function Signup() {
           </Grid>
         </form>
       </div>
-      <Box mt={5}>
-        {/* <Copyright /> */}
+      <Box mt={8}>
+        {
+          (alert) ? <Alert severity={alertType}>{alertMessage}</Alert> : null
+        }
       </Box>
     </Container>
   );

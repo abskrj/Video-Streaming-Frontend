@@ -35,7 +35,6 @@ export default class Navbar extends Component {
                     <SidebarConsumer>
                         {
                             (value) => {
-                                console.log(value);
                                 return (
                                     <Button onClick={value}>
                                         < MenuIcon className="navbar__menu" />
@@ -65,10 +64,15 @@ export default class Navbar extends Component {
                 </div>
 
                 <div className="navbar__right">
-                    <Button>Upload Video</Button>
+
+                    <Link to="/upload" style={{ color: 'inherit', textDecoration: 'inherit' }}>
+                        <Button>Upload Video</Button>
+                    </Link>
+
                     <Button>
                         <NotificationsNoneIcon className="navbar__notification" />
                     </Button>
+
                     <Link to="/login">
                         <Button>
                             <img className="navbar__profile" src="https://secure.gravatar.com/avatar/a001a3f46d1449494fdcb542d22afad0?default=wavatar" height="40px" alt="" />
