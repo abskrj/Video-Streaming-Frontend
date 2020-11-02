@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -12,6 +12,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import axios from "axios";
 import Alert from '@material-ui/lab/Alert';
+import { Redirect } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -33,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Login() {
+export default function Login(props) {
   const classes = useStyles();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -41,6 +42,25 @@ export default function Login() {
   const [alert, setAlert] = useState(false);
   const [alertType, setAlertType] = useState(false);
   const [alertMessage, setAlertMessage] = useState(false);
+  const [redirect, setRedirect] = useState(false);
+
+
+  useEffect(() => {
+    const lastLogin = parseInt(localStorage.getItem('lastLogin')) || null;
+
+    if (!lastLogin) {
+      return;
+    }
+
+    const validLoginTime = lastLogin + 604800000;
+
+    if (validLoginTime < Date.now()) {
+      return;
+    }
+
+    setRedirect(true);
+
+  }, [])
 
   const login = (event) => {
     event.preventDefault();
@@ -61,8 +81,16 @@ export default function Login() {
 
     axios.post("https://radiant-dawn-27084.herokuapp.com/api/auth/signin", data, axiosConfig)
       .then((res) => {
+        console.log(res.data)
         deleteAlert();
         createAlert('success', `Logged in as ${res.data.username}`);
+        localStorage.setItem('accessToken', res.data.accessToken)
+        localStorage.setItem('avtarUrl', res.data.avtarUrl)
+        localStorage.setItem('username', res.data.username)
+        localStorage.setItem('email', res.data.email)
+        localStorage.setItem('id', res.data.id)
+        localStorage.setItem('lastLogin', Date.now());
+
       })
       .catch((err) => {
         deleteAlert();
@@ -86,8 +114,15 @@ export default function Login() {
     setAlert(null);
   }
 
+  const renderRedirect = () => {
+    if (redirect) {
+      return (<Redirect to='/' />)
+    }
+  }
+
   return (
     <Container component="main" maxWidth="xs">
+      {renderRedirect()}
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
