@@ -55,7 +55,7 @@ export default function App() {
               < Home pageTitle="Trending" />
             </Route>
 
-            <Route path="/likedvideos">
+            <Route path="/likes">
               < Home pageTitle="Liked Videos" />
             </Route>
 

@@ -12,22 +12,21 @@ import "../assets/css/navbar.css";
 
 export default function Navbar() {
 
-    const [avtarUrl, setAvtarUrl] = useState('http://www.gravatar.com/avatar/?d=mp');
+    const [avtarUrl, setAvtarUrl] = useState('https://www.gravatar.com/avatar/?d=mp');
     const [search, setSearch] = useState('');
 
     useEffect(() => {
         const avtarUrl = localStorage.getItem('avtarUrl') || null;
-        setAvtarUrl(avtarUrl);
+        if (avtarUrl) {
+            setAvtarUrl(avtarUrl);
+        }
     }, [])
 
     return (
         <div className="navbar">
             <div className="navbar__left">
-
-                
-
                 <Link to="/" style={{ color: 'inherit', textDecoration: 'inherit' }} >
-                    <img src={logo} height="40px" alt="" />
+                    <img className="navbar__logo" src={logo} height="40px" alt="" />
                 </Link>
             </div>
 

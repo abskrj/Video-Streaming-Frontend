@@ -54,14 +54,14 @@ export default class Sidebar extends Component {
                         < SidebarItem Icon={WatchLaterIcon} title="Watch later" />
                     </Link>
 
-                    <Link to='/' style={{ color: 'inherit', textDecoration: 'inherit' }}>
+                    <Link to='/likes' style={{ color: 'inherit', textDecoration: 'inherit' }}>
                         < SidebarItem Icon={ThumbUpIcon} title="Liked videos" />
                     </Link>
 
                     <hr />
 
-                    <Link to='/' style={{ color: 'inherit', textDecoration: 'inherit' }}>
-                        < SidebarItem Icon={SettingsIcon} title="Settings" />
+                    <Link to='/profile' style={{ color: 'inherit', textDecoration: 'inherit' }}>
+                        < SidebarItem Icon={SettingsIcon} title="Profile" />
                     </Link>
 
                     <Link to='/' style={{ color: 'inherit', textDecoration: 'inherit' }}>

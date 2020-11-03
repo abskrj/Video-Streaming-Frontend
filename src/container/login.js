@@ -90,7 +90,6 @@ export default function Login(props) {
         localStorage.setItem('email', res.data.email)
         localStorage.setItem('id', res.data.id)
         localStorage.setItem('lastLogin', Date.now());
-
       })
       .catch((err) => {
         deleteAlert();
