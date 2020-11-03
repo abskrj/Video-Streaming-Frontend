@@ -8,6 +8,7 @@ import Forget from "../container/forget";
 import Watch from "../container/watch";
 import userContext from "../context/userContext";
 import UploadVideo from "../container/uploadVideo";
+import Profile from "../container/profile";
 
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
@@ -26,6 +27,10 @@ export default function App() {
               <Watch />
             </Route>
 
+            <Route path="/profile">
+              <Profile />
+            </Route>
+
             <Route path="/upload">
               <UploadVideo />
             </Route>
@@ -42,7 +47,7 @@ export default function App() {
               <Forget />
             </Route>
 
-            <Route path="/search/:searchQuery">
+            <Route path="/search">
               <Search />
             </Route>
 

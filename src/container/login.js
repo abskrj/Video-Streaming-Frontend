@@ -116,7 +116,7 @@ export default function Login(props) {
 
   const renderRedirect = () => {
     if (redirect) {
-      return (<Redirect to='/' />)
+      return (<Redirect to='/profile' />)
     }
   }
 

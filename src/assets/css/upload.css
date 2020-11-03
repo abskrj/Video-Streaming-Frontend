@@ -1,6 +1,18 @@
 .videoUpload__main {
-    margin-top: 10%;
-    display: flex;
-    flex-direction: column;
     align-items: center;
+}
+
+.videoUpload__Videoform {
+    display: flex;
+    margin: 20px;
+}
+
+h2 {
+    text-align: center;
+    margin: 30px;
+    font-weight: normal;
+}
+
+.videoUpload__input {
+    margin-right: 50px;
 }

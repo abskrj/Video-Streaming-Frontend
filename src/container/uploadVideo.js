@@ -1,4 +1,4 @@
-import { Container, Typography, CssBaseline, FormControl, Input, Button } from '@material-ui/core';
+import { Container, Input, Button, TextField, MenuItem, Select, FormHelperText } from '@material-ui/core';
 import React, { useEffect, useState } from 'react'
 import "../assets/css/upload.css";
 import BackupOutlinedIcon from '@material-ui/icons/BackupOutlined';
@@ -65,23 +65,74 @@ export default function UploadVideo() {
     }
 
     return (
-        <Container component="main" maxWidth="xs">
-            <CssBaseline />
+        <Container component="main" maxWidth="xs" >
+            <h2>Upload Video</h2>
+
             <div className="videoUpload__main">
-                <Typography component="h1" variant="h5">
-                    Upload Video
-                </Typography>
-                <form>
-                    <FormControl>
-                        <Input type="file" autoFocus onChange={event => setVideo(event.target.files[0])} />
-                        {/* <Input type="file" autoFocus /> */}
-                        <Button type="submit" onClick={videoSubmit}> Upload  <BackupOutlinedIcon /></Button>
-                    </FormControl>
+
+                <form className="videoUpload__Videoform" >
+                    <Input className="videoUpload__input" type="file" autoFocus onChange={event => setVideo(event.target.files[0])} />
+                    {/* <Input type="file" autoFocus /> */}
+                    <Button variant="outlined" type="submit" onClick={videoSubmit}> Upload  <BackupOutlinedIcon /></Button>
                 </form>
+                {
+                    (alert) ? <Alert severity={alertType}>{alertMessage}</Alert> : null
+                }
+
+                <h2>Then</h2>
+
+                <form>
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        placeholder="Video Title"
+                        name="title"
+                        autoFocus
+                    // value={username}
+                    // onChange={event => setUsername(event.target.value)}
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="description"
+                        placeholder="Video Description"
+                        type="text"
+                    // value={password}
+                    // onChange={event => setPassword(event.target.value)}
+                    />
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="tags"
+                        placeholder="Tags"
+                        type="text"
+                        helperText="Enter Comma Seperated Tags"
+                    // value={password}
+                    // onChange={event => setPassword(event.target.value)}
+                    />
+                    <Select
+                        variant="outlined"
+                        fullWidth
+                        displayEmpty
+                    // value={age}
+                    // onChange={handleChange}
+                    >
+                        <MenuItem value={10}>Ten</MenuItem>
+                        <MenuItem value={20}>Twenty</MenuItem>
+                        <MenuItem value={30}>Thirty</MenuItem>
+                    </Select>
+                    <FormHelperText>Choose Category</FormHelperText>
+                </form>
+
             </div>
-            {
-                (alert) ? <Alert severity={alertType}>{alertMessage}</Alert> : null
-            }
         </Container>
+
+
     )
 }

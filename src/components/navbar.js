@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import MenuIcon from '@material-ui/icons/Menu';
 import TextField from '@material-ui/core/TextField';
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
@@ -13,7 +12,8 @@ import "../assets/css/navbar.css";
 
 export default function Navbar() {
 
-    const [avtarUrl, setAvtarUrl] = useState('http://www.gravatar.com/avatar/?d=mp')
+    const [avtarUrl, setAvtarUrl] = useState('http://www.gravatar.com/avatar/?d=mp');
+    const [search, setSearch] = useState('');
 
     useEffect(() => {
         const avtarUrl = localStorage.getItem('avtarUrl') || null;
@@ -24,7 +24,7 @@ export default function Navbar() {
         <div className="navbar">
             <div className="navbar__left">
 
-                <Button><MenuIcon /></Button>
+                
 
                 <Link to="/" style={{ color: 'inherit', textDecoration: 'inherit' }} >
                     <img src={logo} height="40px" alt="" />
@@ -34,9 +34,9 @@ export default function Navbar() {
             <div className="navbar__middle">
                 <form noValidate autoComplete="off">
 
-                    <TextField name="searchQuery" className="navbar__search" size="small" id="outlined-basic" label="Search" variant="outlined" />
+                    <TextField onChange={event => setSearch(event.target.value)} name="searchQuery" className="navbar__search" size="small" id="outlined-basic" label="Search" variant="outlined" />
 
-                    <Link to={`/search/`}>
+                    <Link to={`/search?q=${search}`}>
                         <IconButton color="default" aria-label="add to shopping cart">
                             <SearchIcon className="navbar__search__btn" />
                         </IconButton>
