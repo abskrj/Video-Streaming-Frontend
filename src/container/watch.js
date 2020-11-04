@@ -53,18 +53,18 @@ export default class Watch extends Component {
             responsivenessRules: [{
                 className: 'narrow',
                 width: {
-                    max: 640
+                    max: 320
                 }
             }, {
                 className: 'medium-width',
                 width: {
                     min: 640,
-                    max: 700
+                    max: 500
                 }
             }, {
                 className: 'wide',
                 width: {
-                    min: 1024
+                    max: 700
                 }
             }],
             controls: {
@@ -77,7 +77,7 @@ export default class Watch extends Component {
             <div className="watchVideo__main">
                 <div className="video-container" ref={this.videoContainer}>
                     <Replay className="player" options={VideoPlayerConfig} source="https://cdn-firestream.s3.ap-south-1.amazonaws.com/videos/vDIT7VC/vDIT7VC.mpd" initialPlaybackProps={{ isPaused: true }}>
-                        <ShakaVideoStreamer />
+                        <ShakaVideoStreamer className="watchVideo__shaka" />
                     </Replay>
                 </div>
                 <div className="watchVideo__details">

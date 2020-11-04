@@ -103,7 +103,7 @@ export default function Signup() {
       'password': password
     }
 
-    axios.post("https://radiant-dawn-27084.herokuapp.com/api/auth/signup", data, axiosConfig)
+    axios.post("https://api.codedoc.tech/api/auth/signup", data, axiosConfig)
       .then((res) => {
         console.log(res);
         deleteAlert();

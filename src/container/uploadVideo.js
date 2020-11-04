@@ -67,7 +67,7 @@ export default function UploadVideo() {
             }
         }
 
-        axios.post('http://127.0.0.1:3001/api/video/upload', data, axiosConfig)
+        axios.post('https://api.codedoc.tech/api/video/upload', data, axiosConfig)
             .then((res) => {
                 console.log(res);
                 createAlert('info', 'Video Processing, Submit the below form (if not submitted) ');
@@ -75,7 +75,7 @@ export default function UploadVideo() {
             })
             .catch((err) => {
                 console.log(err.response);
-                if (err.response.status) {
+                if (err.response) {
                     createAlert('error', err.response.data.message);
                 }
             });
@@ -101,7 +101,7 @@ export default function UploadVideo() {
             }
         }
 
-        axios.post('http://127.0.0.1:3001/api/video/register', data, axiosConfig)
+        axios.post('https://api.codedoc.tech/api/video/register', data, axiosConfig)
             .then((res) => {
                 console.log(res);
                 deleteAlert();
@@ -112,7 +112,7 @@ export default function UploadVideo() {
                     console.log(err.response);
                     if (err.response) {
                         deleteAlert();
-                        createAlert('error', err.response.data.message);
+                        createAlert('error', "Something went wrong");
                     }
                 }
             });

@@ -1,9 +1,9 @@
-.video-container {
-    height: 100px;
+.watchVideo__main {
+    
 }
 
-.player {
-    flex: 0.5;
-    height: 200px;
-    width: 100px;
+.replay {
+    margin-top: 1%;
+    height: 50% !important;
+    width: 50%;
 }
