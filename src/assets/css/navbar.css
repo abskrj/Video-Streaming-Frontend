@@ -9,9 +9,15 @@
     background-color: white;
 }
 
+.navbar__logo {
+    max-width: 60%;
+    height: auto;
+}
+
 .navbar__left {
     display: flex;
     align-items: center;
+    width: auto;
 }
 
 .navbar__menu {
@@ -21,10 +27,17 @@
 .navbar__middle {
     display: flex;
     align-items: center;
+    width: fit-content;
+}
+
+.navbar__middle > input {
+    width: auto !important;
+    height: auto !important;
 }
 
 .navbar__search {
     width: auto;
+    height: auto;
 }
 
 .navbar__search__btn {

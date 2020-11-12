@@ -12,4 +12,5 @@
 
 .search__main {
     display: flex;
+    overflow-wrap: normal;
 }

@@ -1,9 +1,63 @@
-.watchVideo__main {
-    
+p {
+    margin-right: 5px;
+    font-size: 13px;
+    padding-bottom: 5px;
+}
+
+h2 {
+    font-weight: normal;
+    font-size: 25px;
+    padding-bottom: 5px;
+}
+
+hr {
+    width: 50%;
+    margin-left: 10%;
+}
+
+.watchVideo__desc {
+    margin-left: 10%;
+    padding-top: 1%;
+}
+
+.watchVideo__details {
+    width: 50%;
+    margin-left: 10%;
+    margin-top: 1%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.watchVideo__stats {
+    display: flex;
 }
 
 .replay {
     margin-top: 1%;
+    margin-left: 10%;
     height: 50% !important;
     width: 50%;
+}
+
+@media only screen and (max-width: 768px) {
+    .replay {
+        width: 100%;
+        margin-left: auto;
+    }
+    .watchVideo__details {
+        width: 100%;
+        margin-left: auto;
+    }
+
+    hr {
+        width: auto;
+        margin-left: auto;
+    }
+
+    .watchVideo__desc {
+        width: auto;
+        margin-left: auto;
+    }
+
 }

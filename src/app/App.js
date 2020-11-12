@@ -63,10 +63,6 @@ export default function App() {
               < Home pageTitle="My Videos" />
             </Route>
 
-            <Route path="/watchlater">
-              < Home pageTitle="Watch Later" />
-            </Route>
-
             <Route path="/">
               < Home pageTitle="Recommended" />
             </Route>

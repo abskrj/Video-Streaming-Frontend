@@ -50,10 +50,6 @@ export default class Sidebar extends Component {
                         < SidebarItem Icon={VideoLibraryIcon} title="My videos" />
                     </Link>
 
-                    <Link to="/watchlater" style={{ color: 'inherit', textDecoration: 'inherit' }}>
-                        < SidebarItem Icon={WatchLaterIcon} title="Watch later" />
-                    </Link>
-
                     <Link to='/likes' style={{ color: 'inherit', textDecoration: 'inherit' }}>
                         < SidebarItem Icon={ThumbUpIcon} title="Liked videos" />
                     </Link>

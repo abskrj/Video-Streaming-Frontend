@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import TextField from '@material-ui/core/TextField';
 import SearchIcon from '@material-ui/icons/Search';
 import IconButton from '@material-ui/core/IconButton';
-import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import logo from "../assets/img/logo.png"
@@ -26,7 +25,7 @@ export default function Navbar() {
         <div className="navbar">
             <div className="navbar__left">
                 <Link to="/" style={{ color: 'inherit', textDecoration: 'inherit' }} >
-                    <img className="navbar__logo" src={logo} height="40px" alt="" />
+                    <img className="navbar__logo" src={logo} alt="" />
                 </Link>
             </div>
 
@@ -49,10 +48,6 @@ export default function Navbar() {
                 <Link to="/upload" style={{ color: 'inherit', textDecoration: 'inherit' }}>
                     <Button>Upload Video</Button>
                 </Link>
-
-                <Button>
-                    <NotificationsNoneIcon className="navbar__notification" />
-                </Button>
 
                 <Link to="/login">
                     <Button>
