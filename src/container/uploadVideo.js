@@ -17,7 +17,7 @@ export default function UploadVideo() {
     const [videoTags, setVideoTag] = useState('');
     const [videoCategory, setVideoCategory] = useState('');
     const [disableUploadSubmit, setDisableUploadSubmit] = useState(false);
-    const [disableRegisterSubmit, setDisableRegisterSubmit] = useState(false);
+    const [disableRegisterSubmit, setDisableRegisterSubmit] = useState(true);
 
 
     useEffect(() => {
@@ -44,6 +44,7 @@ export default function UploadVideo() {
 
     const videoSubmit = (event) => {
         event.preventDefault();
+        setDisableUploadSubmit(true);
         deleteAlert();
 
         // console.log(video.);
@@ -58,7 +59,7 @@ export default function UploadVideo() {
             createAlert('error', 'Please Login/Register');
             return;
         }
-        createAlert('info', 'Video Uploading, Submit the below form.');
+        createAlert('info', 'Video Uploading, Fill the below form.');
 
         const axiosConfig = {
             headers: {
@@ -71,10 +72,13 @@ export default function UploadVideo() {
             .then((res) => {
                 console.log(res);
                 createAlert('info', 'Video Processing, Submit the below form (if not submitted) ');
+                setDisableRegisterSubmit(false);
                 setVideoId(res.data.videoId);
             })
             .catch((err) => {
-                console.log(err.response);
+                setDisableRegisterSubmit(true);
+                setDisableUploadSubmit(false);
+
                 if (err.response) {
                     createAlert('error', err.response.data.message);
                 }
@@ -109,7 +113,6 @@ export default function UploadVideo() {
             })
             .catch((err) => {
                 if (err.response) {
-                    console.log(err.response);
                     if (err.response) {
                         deleteAlert();
                         createAlert('error', "Something went wrong");
