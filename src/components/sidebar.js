@@ -4,7 +4,6 @@ import SidebarItem from "./sidebar.item";
 import HomeIcon from '@material-ui/icons/Home';
 import WhatshotIcon from '@material-ui/icons/Whatshot';
 import VideoLibraryIcon from '@material-ui/icons/VideoLibrary';
-import WatchLaterIcon from '@material-ui/icons/WatchLater';
 import ThumbUpIcon from '@material-ui/icons/ThumbUp';
 import SettingsIcon from '@material-ui/icons/Settings';
 import HelpIcon from '@material-ui/icons/Help';

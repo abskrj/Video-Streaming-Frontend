@@ -23,7 +23,7 @@ export default function App() {
 
           <Switch>
 
-            <Route path="/watch/:videoId">
+            <Route path="/watch">
               <Watch />
             </Route>
 

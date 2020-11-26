@@ -12,7 +12,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import axios from "axios";
 import Alert from '@material-ui/lab/Alert';
-import { Redirect } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -42,9 +42,9 @@ export default function Login(props) {
   const [alert, setAlert] = useState(false);
   const [alertType, setAlertType] = useState(false);
   const [alertMessage, setAlertMessage] = useState(false);
-  const [redirect, setRedirect] = useState(false);
 
-
+  const history = useHistory();
+  
   useEffect(() => {
     const lastLogin = parseInt(localStorage.getItem('lastLogin')) || null;
 
@@ -57,8 +57,6 @@ export default function Login(props) {
     if (validLoginTime < Date.now()) {
       return;
     }
-
-    setRedirect(true);
 
   }, [])
 
@@ -90,6 +88,7 @@ export default function Login(props) {
         localStorage.setItem('email', res.data.email)
         localStorage.setItem('id', res.data.id)
         localStorage.setItem('lastLogin', Date.now());
+        history.push("/");
       })
       .catch((err) => {
         deleteAlert();
@@ -113,15 +112,9 @@ export default function Login(props) {
     setAlert(null);
   }
 
-  const renderRedirect = () => {
-    if (redirect) {
-      return (<Redirect to='/profile' />)
-    }
-  }
 
   return (
     <Container component="main" maxWidth="xs">
-      {renderRedirect()}
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>

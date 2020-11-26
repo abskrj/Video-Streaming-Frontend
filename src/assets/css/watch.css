@@ -29,8 +29,17 @@ hr {
     justify-content: space-between;
 }
 
+.watchVideo__tags {
+    color: red;
+    font-weight: bolder;
+}
+
 .watchVideo__stats {
     display: flex;
+}
+
+.video__like:focus {
+    color: red;
 }
 
 .replay {

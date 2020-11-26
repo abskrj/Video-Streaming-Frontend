@@ -14,6 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Alert from '@material-ui/lab/Alert';
 import axios from "axios";
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -46,6 +47,7 @@ export default function Signup() {
   const [alert, setAlert] = useState(false);
   const [alertType, setAlertType] = useState(false);
   const [alertMessage, setAlertMessage] = useState(false);
+  const history = useHistory();
 
   const toggleTnc = () => {
     if (disableSubmit) {
@@ -108,6 +110,7 @@ export default function Signup() {
         console.log(res);
         deleteAlert();
         createAlert('success', res.data.message);
+        history.push("/login");
       })
       .catch((err) => {
         deleteAlert();

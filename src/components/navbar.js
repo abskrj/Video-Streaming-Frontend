@@ -49,7 +49,7 @@ export default function Navbar() {
                     <Button>Upload Video</Button>
                 </Link>
 
-                <Link to="/login">
+                <Link to="/profile">
                     <Button>
                         <img className="navbar__profile" src={avtarUrl} height="40px" alt="" />
                     </Button>
