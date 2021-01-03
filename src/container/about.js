@@ -9,7 +9,7 @@ export default function About() {
     const [progress, setProgress] = useState(<CircularProgress />);
     const [markdown, setMarkdown] = useState('');
 
-    fetch('https://raw.githubusercontent.com/abhishekraj272/Video-Streaming-Frontend/main/README.md?token=AGO7IBUHQDPV67BDX6WYT3277LOG4')
+    fetch('https://raw.githubusercontent.com/abhishekraj272/Video-Streaming-Backend/master/README.md')
         .then(response => {
             return response.text()
         })
