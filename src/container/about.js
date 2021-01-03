@@ -3,9 +3,6 @@ import Sidebar from '../components/sidebar';
 import '../assets/css/about.css';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ReactMarkdown from 'react-markdown';
-import { gfm } from 'remark-gfm';
-
-const markdown = `Just a link: https://reactjs.com.`
 
 export default function About() {
 
