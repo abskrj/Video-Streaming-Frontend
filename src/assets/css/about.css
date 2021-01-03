@@ -1,0 +1,13 @@
+.about__main {
+  display: flex;
+  flex: 0.8;
+  background-color: #f9f9f9;
+}
+
+.about__main p {
+  font-size: 1.2rem;
+}
+
+.about__details {
+  margin: 2rem;
+}

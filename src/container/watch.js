@@ -57,7 +57,7 @@ const VideoPlayerConfig = {
     }
 };
 
-export default function Watch() {
+export default async function Watch() {
 
     const query = new URLSearchParams(window.location.search);
 
@@ -67,15 +67,30 @@ export default function Watch() {
 
     const history = useHistory();
 
-    let accessToken = localStorage.getItem('accessToken', null);
+    let accessToken = localStorage.getItem('accessToken');
 
     if (!accessToken) {
-        history.push("/login");
+        history.push(`/login`);
     }
 
     useEffect(() => {
 
-        let videoMetaData = JSON.parse(localStorage.getItem('videos'));
+        let videoMetaData = localStorage.getItem('videos');
+
+        // if (!videoMetaData) {
+        //     const requestOptions = {
+        //         method: 'GET',
+        //         headers: { 'x-access-token': accessToken },
+        //     };
+
+        //     fetch(`https://api.codedoc.tech/api/list/this?vId=${videoId}`, requestOptions)
+        //         .then(response => response.json())
+        //         .then(jsondata => {
+        //             videoMetaData = jsondata;
+        //         })
+
+        // }
+
         videoMetaData.map(data => {
             if (data.videoId === videoId) {
 
@@ -165,7 +180,7 @@ export default function Watch() {
                         <ThumbDownAltOutlinedIcon ref={dislikeBtn} />
                     </Button>
 
-                    <Button onClick={() => {navigator.clipboard.writeText(window.location.href); alert("Link copied")}}>
+                    <Button onClick={() => { navigator.clipboard.writeText(window.location.href); alert("Link copied") }}>
                         <ShareOutlinedIcon />
                     </Button>
                 </div>

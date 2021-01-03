@@ -2,38 +2,47 @@ import React, { useEffect, useState } from 'react'
 import "../assets/css/body.css"
 import VideoCard from "./videoCard";
 import Alert from '@material-ui/lab/Alert';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
+const isCached = () => {
+    return localStorage.getItem('videos') || null;
+}
 
 export default function Body({ pageTitle }) {
 
     const [videos, setVideos] = useState([]);
     const [alert, setAlert] = useState(null);
+    const [progress, setProgress] = useState(null);
 
     let accessToken = localStorage.getItem('accessToken', null);
 
     useEffect(() => {
 
         let urlVar;
+        let pageType;
 
-        if (pageTitle === "Liked Videos") {
+        if (window.location.pathname === "/likes") {
             if (!accessToken) {
                 setAlert(<Alert severity="error">Please login</Alert>);
                 return;
             }
             urlVar = 'https://api.codedoc.tech/api/list/mylikes';
+            pageType = 'likedvideos';
         }
-        else if (pageTitle === "My Videos") {
+        else if (window.location.pathname === "/myvideos") {
             if (!accessToken) {
                 setAlert(<Alert severity="error">Please login</Alert>);
                 return;
             }
             urlVar = 'https://api.codedoc.tech/api/list/myvideos';
+            pageType = 'myvideos';
         }
 
         else {
             urlVar = 'https://api.codedoc.tech/api/list/videos';
+            pageType = 'videos';
         }
-        setAlert(<Alert severity="info">Loading......</Alert>);
-
+        setProgress(<CircularProgress />);
 
         const requestOptions = {
             method: 'GET',
@@ -43,16 +52,24 @@ export default function Body({ pageTitle }) {
         fetch(urlVar, requestOptions)
             .then(response => response.json())
             .then(jsondata => {
-                localStorage.setItem('videos', JSON.stringify(jsondata));
+                localStorage.setItem(pageType, JSON.stringify(jsondata));
                 setVideos(jsondata);
                 setAlert(null);
-            })
+                setProgress(null);
+            });
 
     }, [pageTitle])
 
     return (
         <div className="body__main">
-            <h2>{pageTitle}</h2>
+
+            <div className="body__title">
+                <h2>{pageTitle}</h2>
+                {
+                    progress
+                }
+            </div>
+
             <div className="body__video">
 
                 {alert}

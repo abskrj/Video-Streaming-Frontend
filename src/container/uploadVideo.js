@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react'
 import "../assets/css/upload.css";
 import BackupOutlinedIcon from '@material-ui/icons/BackupOutlined';
 import Alert from '@material-ui/lab/Alert';
-import axios from "axios"
+import axios from "axios";
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 export default function UploadVideo() {
 
@@ -18,6 +19,7 @@ export default function UploadVideo() {
     const [videoCategory, setVideoCategory] = useState('');
     const [disableUploadSubmit, setDisableUploadSubmit] = useState(false);
     const [disableRegisterSubmit, setDisableRegisterSubmit] = useState(true);
+    const [progress, setProgress] = useState(null);
 
 
     useEffect(() => {
@@ -55,6 +57,8 @@ export default function UploadVideo() {
 
         const accessToken = localStorage.getItem('accessToken') || null;
 
+        setProgress(<LinearProgress />);
+
         if (!accessToken) {
             createAlert('error', 'Please Login/Register');
             return;
@@ -83,6 +87,7 @@ export default function UploadVideo() {
                     createAlert('error', err.response.data.message);
                 }
             });
+        setProgress(null);
     }
 
     const videoRegister = (event) => {
@@ -132,71 +137,77 @@ export default function UploadVideo() {
     }
 
     return (
-        <Container component="main" maxWidth="xs" >
+        <>
+            <Container component="main" maxWidth="xs" >
 
-            <div className="videoUpload__main">
-                <h2>Upload Video </h2>
+                <div className="videoUpload__main">
+                    <h2>Upload Video </h2>
 
 
-                <form className="videoUpload__Videoform" >
-                    <Input className="videoUpload__input" type="file" autoFocus onChange={event => setVideo(event.target.files[0])} />
-                    {/* <Input type="file" autoFocus /> */}
-                    <Button disabled={disableUploadSubmit} variant="outlined" type="submit" onClick={videoSubmit}> Upload  <BackupOutlinedIcon /></Button>
-                </form>
-                {
-                    (alert) ? <Alert severity={alertType}>{alertMessage}</Alert> : null
-                }
+                    <form className="videoUpload__Videoform" >
+                        <Input className="videoUpload__input" type="file" autoFocus onChange={event => setVideo(event.target.files[0])} />
+                        <Button disabled={disableUploadSubmit} variant="outlined" type="submit" onClick={videoSubmit}> Upload  <BackupOutlinedIcon /></Button>
+                    </form>
+                    {
+                        (alert) ? <Alert severity={alertType}>{alertMessage}</Alert> : null
+                    }
 
-                <h2>Then</h2>
+                    <h2>Then</h2>
 
-                <form className="videoUpload__register">
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        placeholder="Video Title"
-                        name="title"
-                        autoFocus
-                        onChange={event => setVideoTitle(event.target.value)}
-                    />
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="description"
-                        placeholder="Video Description"
-                        type="text"
-                        onChange={event => setVideoDescription(event.target.value)}
-                    />
-                    <TextField
-                        variant="outlined"
-                        margin="normal"
-                        required
-                        fullWidth
-                        name="tags"
-                        placeholder="Tags"
-                        type="text"
-                        helperText="Enter Comma Seperated Tags"
-                        onChange={event => setVideoTag(event.target.value)}
-                    />
-                    <select name="category" onChange={event => setVideoCategory(event.target.value)}>
-                        <option value="Blog">Blog</option>
-                        <option value="Comedy">Comedy</option>
-                        <option value="Education">Education</option>
-                        <option value="How to">How to</option>
-                        <option value="News">News</option>
-                        <option value="Non-Profit">Non-Profit</option>
-                        <option value="Science and Tech">Science and Tech</option>
-                    </select>
+                    <form className="videoUpload__register">
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            placeholder="Video Title"
+                            name="title"
+                            autoFocus
+                            onChange={event => setVideoTitle(event.target.value)}
+                        />
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="description"
+                            placeholder="Video Description"
+                            type="text"
+                            onChange={event => setVideoDescription(event.target.value)}
+                        />
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="tags"
+                            placeholder="Tags"
+                            type="text"
+                            helperText="Enter Comma Seperated Tags"
+                            onChange={event => setVideoTag(event.target.value)}
+                        />
+                        <select name="category" onChange={event => setVideoCategory(event.target.value)}>
+                            <option value="Blog">Blog</option>
+                            <option value="Comedy">Comedy</option>
+                            <option value="Education">Education</option>
+                            <option value="How to">How to</option>
+                            <option value="News">News</option>
+                            <option value="Non-Profit">Non-Profit</option>
+                            <option value="Science and Tech">Science and Tech</option>
+                        </select>
 
-                    <FormHelperText>Choose Category</FormHelperText>
-                    <Button disabled={disableRegisterSubmit} fullWidth onClick={videoRegister} type="submit" variant="outlined">Submit</Button>
-                </form>
+                        <FormHelperText>Choose Category</FormHelperText>
+                        <Button disabled={disableRegisterSubmit} fullWidth onClick={videoRegister} type="submit" variant="outlined">Submit</Button>
+                    </form>
 
-            </div>
-        </Container>
+                </div>
+            </Container>
+
+            {
+                progress
+            }
+
+        </>
 
 
     )

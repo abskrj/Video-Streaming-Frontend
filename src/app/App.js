@@ -12,9 +12,10 @@ import Profile from "../container/profile";
 
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import About from '../container/about';
 
 export default function App() {
-  
+
   return (
     <div className="app">
       <Router >
@@ -25,6 +26,10 @@ export default function App() {
 
             <Route path="/watch">
               <Watch />
+            </Route>
+
+            <Route path="/about">
+              <About />
             </Route>
 
             <Route path="/profile">

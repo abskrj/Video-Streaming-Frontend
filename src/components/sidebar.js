@@ -36,31 +36,31 @@ export default class Sidebar extends Component {
                 <div className="sidebar__main" style={{ display: this.state.sideBar ? 'block' : 'none' }}>
 
                     <Link to="/" style={{ color: 'inherit', textDecoration: 'inherit' }}>
-                        < SidebarItem selected Icon={HomeIcon} title="Home" />
+                        < SidebarItem selected={window.location.pathname === '/' ? true : false} Icon={HomeIcon} title="Home" />
                     </Link>
 
                     <Link to="/trending" style={{ color: 'inherit', textDecoration: 'inherit' }}>
-                        < SidebarItem Icon={WhatshotIcon} title="Trending" />
+                        < SidebarItem selected={window.location.pathname === '/trending' ? true : false} Icon={WhatshotIcon} title="Trending" />
                     </Link>
 
                     <hr />
 
                     <Link to="/myvideos" style={{ color: 'inherit', textDecoration: 'inherit' }}>
-                        < SidebarItem Icon={VideoLibraryIcon} title="My videos" />
+                        < SidebarItem selected={window.location.pathname === '/myvideos' ? true : false} Icon={VideoLibraryIcon} title="My videos" />
                     </Link>
 
                     <Link to='/likes' style={{ color: 'inherit', textDecoration: 'inherit' }}>
-                        < SidebarItem Icon={ThumbUpIcon} title="Liked videos" />
+                        < SidebarItem selected={window.location.pathname === '/likes' ? true : false} Icon={ThumbUpIcon} title="Liked videos" />
                     </Link>
 
                     <hr />
 
                     <Link to='/profile' style={{ color: 'inherit', textDecoration: 'inherit' }}>
-                        < SidebarItem Icon={SettingsIcon} title="Profile" />
+                        < SidebarItem selected={window.location.pathname === '/profile' ? true : false} Icon={SettingsIcon} title="Profile" />
                     </Link>
 
-                    <Link to='/' style={{ color: 'inherit', textDecoration: 'inherit' }}>
-                        < SidebarItem Icon={HelpIcon} title="Help" />
+                    <Link to='/about' style={{ color: 'inherit', textDecoration: 'inherit' }}>
+                        < SidebarItem selected={window.location.pathname === '/about' ? true : false} Icon={HelpIcon} title="About" />
                     </Link>
 
                 </div>
