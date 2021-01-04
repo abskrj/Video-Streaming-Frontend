@@ -57,39 +57,44 @@ const VideoPlayerConfig = {
     }
 };
 
-export default async function Watch() {
+export default function Watch() {
 
     const query = new URLSearchParams(window.location.search);
 
     const videoId = query.get('v');
 
-    const [video, setVideo] = useState({});
+    const [video, setVideo] = useState({ title: 'Loading', views: 'Loading', createdAt: 'Loading', _id: 'Loading', tags: 'Loading' });
 
     const history = useHistory();
 
-    let accessToken = localStorage.getItem('accessToken');
+    let accessToken = localStorage.getItem('accessToken') || null;
 
     if (!accessToken) {
         history.push(`/login`);
     }
 
+    console.log('fired');
+
     useEffect(() => {
 
-        let videoMetaData = localStorage.getItem('videos');
 
-        // if (!videoMetaData) {
-        //     const requestOptions = {
-        //         method: 'GET',
-        //         headers: { 'x-access-token': accessToken },
-        //     };
+        let videoMetaData = localStorage.getItem('videos') || null;
 
-        //     fetch(`https://api.codedoc.tech/api/list/this?vId=${videoId}`, requestOptions)
-        //         .then(response => response.json())
-        //         .then(jsondata => {
-        //             videoMetaData = jsondata;
-        //         })
+        videoMetaData = JSON.parse(videoMetaData);
 
-        // }
+        if (!videoMetaData) {
+            const requestOptions = {
+                method: 'GET',
+                headers: { 'x-access-token': accessToken },
+            };
+
+            fetch(`https://api.codedoc.tech/api/list/this?vId=${videoId}`, requestOptions)
+                .then(response => response.json())
+                .then(jsondata => {
+                    videoMetaData = jsondata;
+                })
+
+        }
 
         videoMetaData.map(data => {
             if (data.videoId === videoId) {
