@@ -26,7 +26,7 @@ export default function Body({ pageTitle }) {
                 setAlert(<Alert severity="error">Please login</Alert>);
                 return;
             }
-            urlVar = 'https://api.codedoc.tech/api/list/mylikes';
+            urlVar = 'https://api.firestreamz.co/api/list/mylikes';
             pageType = 'likedvideos';
         }
         else if (window.location.pathname === "/myvideos") {
@@ -34,12 +34,12 @@ export default function Body({ pageTitle }) {
                 setAlert(<Alert severity="error">Please login</Alert>);
                 return;
             }
-            urlVar = 'https://api.codedoc.tech/api/list/myvideos';
+            urlVar = 'https://api.firestreamz.co/api/list/myvideos';
             pageType = 'myvideos';
         }
 
         else {
-            urlVar = 'https://api.codedoc.tech/api/list/videos';
+            urlVar = 'https://api.firestreamz.co/api/list/videos';
             pageType = 'videos';
         }
         setProgress(<CircularProgress />);

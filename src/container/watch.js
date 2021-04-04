@@ -88,7 +88,7 @@ export default function Watch() {
                 headers: { 'x-access-token': accessToken },
             };
 
-            fetch(`https://api.codedoc.tech/api/list/this?vId=${videoId}`, requestOptions)
+            fetch(`https://api.firestreamz.co/api/list/this?vId=${videoId}`, requestOptions)
                 .then(response => response.json())
                 .then(jsondata => {
                     videoMetaData = jsondata;
@@ -115,7 +115,7 @@ export default function Watch() {
                     headers: { 'x-access-token': accessToken },
                 };
 
-                fetch(`https://api.codedoc.tech/api/video/view/${data._id}`, requestOptions);
+                fetch(`https://api.firestreamz.co/api/video/view/${data._id}`, requestOptions);
 
                 setVideo(data);
             }
@@ -135,7 +135,7 @@ export default function Watch() {
             headers: { 'x-access-token': accessToken },
         };
 
-        fetch(`https://api.codedoc.tech/api/video/like/${video._id}`, requestOptions);
+        fetch(`https://api.firestreamz.co/api/video/like/${video._id}`, requestOptions);
     }
 
     const videoDislike = (e) => {
@@ -148,7 +148,7 @@ export default function Watch() {
             headers: { 'x-access-token': accessToken },
         };
 
-        fetch(`https://api.codedoc.tech/api/video/dislike/${video._id}`, requestOptions);
+        fetch(`https://api.firestreamz.co/api/video/dislike/${video._id}`, requestOptions);
     }
 
     return (

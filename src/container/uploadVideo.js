@@ -72,7 +72,7 @@ export default function UploadVideo() {
             }
         }
 
-        axios.post('https://api.codedoc.tech/api/video/upload', data, axiosConfig)
+        axios.post('https://api.firestreamz.co/api/video/upload', data, axiosConfig)
             .then((res) => {
                 console.log(res);
                 createAlert('info', 'Video Processing, Submit the below form (if not submitted) ');
@@ -110,7 +110,7 @@ export default function UploadVideo() {
             }
         }
 
-        axios.post('https://api.codedoc.tech/api/video/register', data, axiosConfig)
+        axios.post('https://api.firestreamz.co/api/video/register', data, axiosConfig)
             .then((res) => {
                 console.log(res);
                 deleteAlert();

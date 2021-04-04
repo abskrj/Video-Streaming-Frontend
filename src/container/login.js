@@ -77,7 +77,7 @@ export default function Login(props) {
       'password': password
     }
 
-    axios.post("https://api.codedoc.tech/api/auth/signin", data, axiosConfig)
+    axios.post("https://api.firestreamz.co/api/auth/signin", data, axiosConfig)
       .then((res) => {
         console.log(res.data)
         deleteAlert();
