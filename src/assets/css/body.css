@@ -1,8 +1,6 @@
 .body__main {
-  flex: 0.8;
   background-color: #f9f9f9;
-  padding: 20px 40px;
-  padding-bottom: 0;
+  padding: 2%;
 }
 
 .body__title {
@@ -18,6 +16,8 @@
 .body__video {
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .body__main > h2 {

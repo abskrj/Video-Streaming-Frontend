@@ -1,5 +1,5 @@
 .videoCard {
-    width: 270px;
+    width: 301px;
     margin-bottom: 40px;
     transition: all .1s ease-in-out;
 }
@@ -14,8 +14,8 @@
 }
 
 .videoCard__thumbnail {
-    height: 140px;
-    width: 250px;
+    height: 160px;
+    width: 100%;
 }
 
 .videoCard__avtar {

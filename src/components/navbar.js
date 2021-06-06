@@ -5,8 +5,11 @@ import IconButton from '@material-ui/core/IconButton';
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import logo from "../assets/img/logo.png"
+import MenuIcon from '@material-ui/icons/Menu';
 
 import "../assets/css/navbar.css";
+import { useDispatch } from 'react-redux';
+import { toggleSidebar } from '../redux/action';
 
 
 export default function Navbar() {
@@ -19,17 +22,26 @@ export default function Navbar() {
         if (avtarUrl) {
             setAvtarUrl(avtarUrl);
         }
-    }, [])
+    }, []);
+
+    const dispatch = useDispatch();
+
+    const toggleMenu = () => {
+        dispatch(toggleSidebar());
+    }
 
     return (
         <div className="navbar">
             <div className="navbar__left">
+                <IconButton onClick={toggleMenu} >
+                    <MenuIcon />
+                </IconButton>
                 <Link to="/" style={{ color: 'inherit', textDecoration: 'inherit' }} >
                     <img className="navbar__logo" src={logo} alt="" />
                 </Link>
             </div>
 
-            <div className="navbar__middle">
+            {/* <div className="navbar__middle">
                 <form noValidate autoComplete="off">
 
                     <TextField onChange={event => setSearch(event.target.value)} name="searchQuery" className="navbar__search" size="small" id="outlined-basic" label="Search" variant="outlined" />
@@ -41,12 +53,12 @@ export default function Navbar() {
                     </Link>
 
                 </form>
-            </div>
+            </div> */}
 
             <div className="navbar__right">
 
                 <Link to="/upload" style={{ color: 'inherit', textDecoration: 'inherit' }}>
-                    <Button>Upload Video</Button>
+                    <Button>Upload</Button>
                 </Link>
 
                 <Link to="/profile">

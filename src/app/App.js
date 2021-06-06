@@ -6,7 +6,6 @@ import Login from "../container/login";
 import Signup from "../container/signup";
 import Forget from "../container/forget";
 import Watch from "../container/watch";
-import userContext from "../context/userContext";
 import UploadVideo from "../container/uploadVideo";
 import Profile from "../container/profile";
 
@@ -19,7 +18,6 @@ export default function App() {
   return (
     <div className="app">
       <Router >
-        <userContext.Provider value={{}}>
           <Navbar />
 
           <Switch>
@@ -73,7 +71,6 @@ export default function App() {
             </Route>
           </Switch>
 
-        </userContext.Provider>
       </Router>
     </div>
   )
