@@ -1,4 +1,7 @@
-# Streaming Front (Microservice)
+# Streaming Frontend
+
+Frontend: https://github.com/abhishekraj272/Video-Streaming-Frontend
+Backend: https://github.com/abhishekraj272/Video-Streaming-Backend
 
 ## Getting Started
 
