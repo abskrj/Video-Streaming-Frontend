@@ -15,3 +15,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.rousi-navi-ok{
+  font: 100;
+  display: block;
+  margin: auto;
+  letter-spacing: normal;
+  
+}
